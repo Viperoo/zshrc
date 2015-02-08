@@ -32,8 +32,11 @@ if which rsync >/dev/null; then
     alias rcp='rsync -aP'
 fi
 
-
-alias ls='ls --classify --color --human-readable --group-directories-first'
+if [[ $platform == 'linux' ]]; then
+  alias ls='ls --classify --color --human-readable --group-directories-first'
+elif [[ $platform == 'freebsd' ]]; then
+  alias ls='ls -G'
+fi
 alias cp='nocorrect cp --interactive --verbose --recursive --preserve=all'
 alias mv='nocorrect mv --verbose --interactive'
 alias rm='nocorrect rm -Irv'
