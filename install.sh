@@ -58,7 +58,7 @@ fi
 
 cd /tmp
 echo "Cloning ZSH configuration.."
-git clone https://github.com/bosha/zshrc.git &> /dev/null
+git clone https://github.com/Viperoo/zshrc.git &> /dev/null
 
 echo "Applying configuration"
 mv zshrc/.zshrc "$HOME"/ &> /dev/null

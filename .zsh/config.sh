@@ -21,24 +21,24 @@ export GREP_OPTIONS='--color=auto'
 export HISTTIMEFORMAT="%t%d.%m.%y %H:%M:%S%t"
 export HISTIGNORE="&:ls:[bf]g:exit"
 
-export PATH="$PATH:/home/$USER/bin" # add my bin path 
-export EDITOR="/usr/bin/vim"
+export PATH="$PATH:/home/$USER/bin" # add my bin path
+export EDITOR="/usr/bin/nano"
 export PAGER='less'
 export VISUAL='vim'
 
 # I prefer english language
-export LANG="en_US.UTF-8"
-export LC_PAPER="ru_RU.UTF-8"
-export LC_MEASUREMENT="ru_RU.UTF-8"
-export LC_TIME="ru_RU.UTF-8" 
-export LC_ALL="en_US.UTF-8"
+export LANG="pl_PL.UTF-8"
+export LC_PAPER="pl_PL.UTF-8"
+export LC_MEASUREMENT="pl_PL.UTF-8"
+export LC_TIME="pl_PL.UTF-8"
+export LC_ALL="pl_PL.UTF-8"
 
 
-# append history list to the history file; 
-setopt appendhistory 
+# append history list to the history file;
+setopt appendhistory
 
 # import new commands from the history file also in other zsh-session
-setopt sharehistory 
+setopt sharehistory
 
 # Remove blank lines from history
 setopt hist_reduce_blanks
@@ -47,21 +47,21 @@ setopt hist_reduce_blanks
 setopt hist_ignore_all_dups
 
 # Avoid "beep"ing
-#setopt beep 
-setopt nobeep 
+#setopt beep
+setopt nobeep
 
 # Extended "globbing"
-setopt extended_glob 
+setopt extended_glob
 
 # try to avoid the 'zsh: no matches found...'
-#setopt nomatch 
+#setopt nomatch
 setopt nonomatch
 
 # save each command's beginning timestamp and the duration to the history file
 setopt extended_history
 
 # Add comamnds as they are typed, don't wait until shell exit
-setopt inc_append_history 
+setopt inc_append_history
 
 # report the status of backgrounds jobs immediately
 setopt notify
@@ -74,7 +74,7 @@ setopt noflowcontrol
 
 # Send *not* a HUP signal to running jobs when the shell exits.
 setopt nohup
- 
+
 # Report the status of background and suspended jobs before exiting a shell
 # with job control; a second attempt to exit the shell will succeed.
 setopt checkjobs
