@@ -14,7 +14,7 @@ alias -s {jpg,png,svg,xpm,bmp}=gpicview
 autoload -U pick-web-browser
 alias -s {html,htm,xhtml}=pick-web-browser
 
-if [ -f /usr/bin/grc ]; then
+if [[ ( -f /usr/bin/grc || -f /usr/local/bin/grc )]]; then
     alias grc='grc --colour=auto'
     alias ping='grc ping'
     alias last='grc last'
