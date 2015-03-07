@@ -66,7 +66,7 @@ mv zshrc/.zsh "$HOME"/ &> /dev/null
 
 echo "Cloning zsh-syntax-highlighting.."
 mkdir -p "$HOME"/.zsh/plugins/zsh-syntax-highlighting
-git clone git://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME"/.zsh/plugins/zsh-syntax-highlighting/ &> /dev/null
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME"/.zsh/plugins/zsh-syntax-highlighting/ &> /dev/null
 
 echo "Cleaning up.."
 rm -rf /tmp/zshrc &> /dev/null
