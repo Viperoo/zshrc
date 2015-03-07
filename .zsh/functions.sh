@@ -15,7 +15,7 @@ function preexec {
     esac
 }
 
-extract () 
+extract ()
 {
     echo Extracting $1 ...
     if [ -f $1 ] ; then
@@ -37,9 +37,9 @@ extract ()
     else
         echo "'$1' is not a valid file"
     fi
-} 
+}
 
-pk () 
+pk ()
 {
     echo "Archiving $1 ..."
     if [ $1 ] ; then
@@ -56,5 +56,36 @@ pk ()
     else
         echo "'$1' is not a valid file"
     fi
-} 
+}
 
+function zsh_stats() {
+  fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n20
+}
+
+function paste() {
+  if [ -z $1 ]; then
+    1=text
+  fi
+
+  a=$(<&0)
+  if [ -z $2 ]; then
+    2=1
+  fi
+
+  curl -d lang=$1 -d private=$2 -d name=Viperoo -d text="$(echo $a)" http://p.szmijewski.pl/api/create
+}
+
+
+function paste() {
+  a=$(<&0)
+  a=$(echo $a | sed -e 's/&/%26/g')
+  if [ -z $2 ]; then
+    2=1
+  fi
+
+  if [ -z $1 ]; then
+    1=text
+  fi
+
+  curl -d lang=$1 -d private=$2 -d name=Viperoo --data-ascii text="$(echo $a)" "http://p.szmijewski.pl/api/create"
+}
