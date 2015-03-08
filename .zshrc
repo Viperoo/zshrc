@@ -10,6 +10,12 @@ do
 done
 unset rc
 
+# Load custom configuration if exists
+if [ -f ~/.zshcustom ]; then
+    source ~/.zshcustom
+fi
+
+# Show alsi if exists
 if [[ ( -f /usr/bin/alsi || -f /usr/local/bin/alsi )]]; then
     alsi
 fi
