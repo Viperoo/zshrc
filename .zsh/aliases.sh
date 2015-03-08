@@ -34,9 +34,12 @@ fi
 
 if [[ $platform == 'linux' ]]; then
   alias ls='ls --classify --color --human-readable --group-directories-first'
+  alias connectionsperip='netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n'
 elif [[ $platform == 'freebsd' ]]; then
   alias ls='ls -G'
+  alias connectionsperip='netstat -na |awk '{print $5}' |cut -d "." -f1,2,3,4 |sort |uniq -c |sort -nr'
 fi
+alias connectionon80='netstat -an | grep 80 | wc -l'
 alias cp='nocorrect cp --interactive --verbose --recursive --preserve=all'
 alias mv='nocorrect mv --verbose --interactive'
 alias rm='nocorrect rm -Irv'
