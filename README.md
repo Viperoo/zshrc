@@ -1,7 +1,7 @@
 Screenshot
 ----------
 
-![Screenshot](https://github.com/bosha/zshrc/raw/master/screenshot.png)
+![Screenshot](https://raw.githubusercontent.com/Viperoo/zshrc/master/screenshot.png)
 
 Installation
 ------------
