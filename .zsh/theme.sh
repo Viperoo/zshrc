@@ -81,11 +81,12 @@ fi
 
 local return_code="%(?..%{$PR_RED%}%? ↵%{$PR_NO_COLOR%})"
 local user_host='${PR_USER}${PR_CYAN}@${PR_HOST}'
+local time='(%D{%H:%M})'
 local current_dir='%{$PR_BOLD$PR_BLUE%}%~%{$PR_NO_COLOR%}'
 
 if [[ $(tty) == *pts* ]]; then
     export TERM="xterm-256color" # 256-colour terminal 
-    PROMPT="╭─${user_host} ${current_dir}
+    PROMPT="╭─${user_host} ${time} ${current_dir}
 ╰─$PR_PROMPT "
     RPS1="${return_code}"
     zle -N zle-keymap-select
