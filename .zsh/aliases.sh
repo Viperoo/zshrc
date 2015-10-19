@@ -65,6 +65,7 @@ alias logo="exit"
 alias ex="exit"
 alias i="grep"
 alias less='zless'
+alias zreload='source ~/.zshrc'
 
 # Inline aliases, zsh -g aliases can be anywhere in command line
 alias -g G='| grep -e'
