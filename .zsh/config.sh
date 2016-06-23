@@ -12,6 +12,11 @@ source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 
+# ssh-agent
+source $ZDOTDIR/plugins/ssh-agent/ssh-agent.plugin.zsh
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+
+
 export BC_ENV_ARGS="--quiet --mathlib"
 
 platform='unknown'

@@ -64,9 +64,13 @@ echo "Applying configuration"
 mv zshrc/.zshrc "$HOME"/ &> /dev/null
 mv zshrc/.zsh "$HOME"/ &> /dev/null
 
-echo "Cloning zsh-syntax-highlighting.."
+echo "Cloning zsh-syntax-highlighting..."
 mkdir -p "$HOME"/.zsh/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME"/.zsh/plugins/zsh-syntax-highlighting/ &> /dev/null
+
+echo "Geting ssh-agent..."
+mkdir -p "$HOME"/.zsh/plugins/ssh-agent
+wget -O "$HOME"/.zsh/plugins/ssh-agent/ssh-agent.plugin.zsh https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/plugins/ssh-agent/ssh-agent.plugin.zsh &> /dev/null
 
 echo "Cleaning up.."
 rm -rf /tmp/zshrc &> /dev/null
