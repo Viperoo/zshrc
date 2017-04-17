@@ -64,6 +64,10 @@ echo "Applying configuration"
 mv zshrc/.zshrc "$HOME"/ &> /dev/null
 mv zshrc/.zsh "$HOME"/ &> /dev/null
 
+echo "Cloning zsh-git-prompt..."
+mkdir -p "$HOME"/.zsh/plugins/zsh-git-prompt
+git clone https://github.com/olivierverdier/zsh-git-prompt.git "$HOME"/.zsh/plugins/zsh-git-prompt/ &> /dev/null
+
 echo "Cloning zsh-syntax-highlighting..."
 mkdir -p "$HOME"/.zsh/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$HOME"/.zsh/plugins/zsh-syntax-highlighting/ &> /dev/null
