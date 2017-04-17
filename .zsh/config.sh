@@ -7,6 +7,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=1000
 
+# git-prompt
+source $ZDOTDIR/plugins/zsh-git-prompt/zshrc.sh
+
 # Fish-like term highlighing
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)

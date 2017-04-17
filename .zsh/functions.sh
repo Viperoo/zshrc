@@ -138,3 +138,55 @@ transfer() {
     # cleanup
     rm -f $tmpfile
 }
+
+# find shorthand
+function f() {
+	find . -name "$1" 2>&1 | grep -v 'Permission denied'
+}
+
+# Copy w/ progress
+cp_p () {
+  rsync -WavP --human-readable --progress $1 $2
+}
+
+# get gzipped size
+function gz() {
+	echo "orig size    (bytes): "
+	cat "$1" | wc -c
+	echo "gzipped size (bytes): "
+	gzip -c "$1" | wc -c
+}
+
+# whois a domain or a URL
+function whois() {
+	local domain=$(echo "$1" | awk -F/ '{print $3}') # get domain from URL
+	if [ -z $domain ] ; then
+		domain=$1
+	fi
+	echo "Getting whois record for: $domain …"
+
+	# avoid recursion
+					# this is the best whois server
+													# strip extra fluff
+	/usr/bin/whois -h whois.internic.net $domain | sed '/NOTICE:/q'
+}
+
+function localip(){
+	function _localip(){ echo "📶  "$(ipconfig getifaddr "$1"); }
+	export -f _localip
+	local purple="\x1B\[35m" reset="\x1B\[m"
+	networksetup -listallhardwareports | \
+		sed -r "s/Hardware Port: (.*)/${purple}\1${reset}/g" | \
+		sed -r "s/Device: (en.*)$/_localip \1/e" | \
+		sed -r "s/Ethernet Address:/📘 /g" | \
+		sed -r "s/(VLAN Configurations)|==*//g"
+}
+
+log() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzf --ansi --no-sort --reverse --tiebreak=index --toggle-sort=\` \
+      --bind "ctrl-m:execute:
+                echo '{}' | grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R'"
+}
