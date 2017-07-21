@@ -121,20 +121,22 @@ transfer() {
             # zip directory and transfer
             zipfile=$( mktemp -t transferXXX.zip )
             cd $(dirname $file) && zip -r -q - $(basename $file) >> $zipfile
-            curl --progress-bar --upload-file "$zipfile" "https://transfer.sh/$basefile.zip" >> $tmpfile
+            curl --progress-bar --upload-file "$zipfile" "https://transfersh.szmijewski.pl/$basefile.zip" >> $tmpfile
             rm -f $zipfile
         else
             # transfer file
-            curl --progress-bar --upload-file "$file" "https://transfer.sh/$basefile" >> $tmpfile
+            curl --progress-bar --upload-file "$file" "https://transfersh.szmijewski.pl/$basefile" >> $tmpfile
         fi
     else
         # transfer pipe
-        curl --progress-bar --upload-file "-" "https://transfer.sh/$file" >> $tmpfile
+        curl --progress-bar --upload-file "-" "https://transfersh.szmijewski.pl/$file" >> $tmpfile
     fi
 
     # cat output link
     cat $tmpfile
 
+    echo
+    echo 
     # cleanup
     rm -f $tmpfile
 }
