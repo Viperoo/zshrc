@@ -31,37 +31,56 @@ elif [[ "$unamestr" == 'FreeBSD' ]]; then
   platform='freebsd'
 fi
 
-# Enable color in grep
-export GREP_OPTIONS='--color=auto'
-#export GREP_COLOR='3;33'
-
 export HISTTIMEFORMAT="%t%d.%m.%y %H:%M:%S%t"
 export HISTIGNORE="&:ls:[bf]g:exit"
 
-export PATH="$PATH:/home/$USER/bin" # add my bin path
 export EDITOR="/usr/bin/nano"
 export PAGER='less'
 export VISUAL='vim'
 
 # I prefer english language
-export LANG="pl_PL.UTF-8"
+export LANG="en_US.UTF-8"
 export LC_PAPER="pl_PL.UTF-8"
 export LC_MEASUREMENT="pl_PL.UTF-8"
 export LC_TIME="pl_PL.UTF-8"
 export LC_ALL="pl_PL.UTF-8"
 
+########################################################################################
+## Grep colors
+# source https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/grep.zsh
+grep-flag-available() {
+    echo | grep $1 "" >/dev/null 2>&1
+}
 
-# append history list to the history file;
-setopt appendhistory
+GREP_OPTIONS=""
 
-# import new commands from the history file also in other zsh-session
-setopt sharehistory
+# color grep results
+if grep-flag-available --color=auto; then
+    GREP_OPTIONS+=" --color=auto"
+fi
 
-# Remove blank lines from history
-setopt hist_reduce_blanks
+# ignore VCS folders (if the necessary grep flags are available)
+VCS_FOLDERS="{.bzr,CVS,.git,.hg,.svn}"
 
-# Remove all duplicates from history
-setopt hist_ignore_all_dups
+if grep-flag-available --exclude-dir=.cvs; then
+    GREP_OPTIONS+=" --exclude-dir=$VCS_FOLDERS"
+elif grep-flag-available --exclude=.cvs; then
+    GREP_OPTIONS+=" --exclude=$VCS_FOLDERS"
+fi
+
+# export grep settings
+alias grep="grep $GREP_OPTIONS"
+# clean up
+unset GREP_OPTIONS
+unset VCS_FOLDERS
+unfunction grep-flag-available
+########################################################################################
+
+
+# Changing/making/removing directory
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
 
 # Avoid "beep"ing
 #setopt beep
@@ -73,12 +92,6 @@ setopt extended_glob
 # try to avoid the 'zsh: no matches found...'
 #setopt nomatch
 setopt nonomatch
-
-# save each command's beginning timestamp and the duration to the history file
-setopt extended_history
-
-# Add comamnds as they are typed, don't wait until shell exit
-setopt inc_append_history
 
 # report the status of backgrounds jobs immediately
 setopt notify
@@ -108,6 +121,20 @@ setopt hash_list_all
 
 # not just at the end
 setopt completeinword
+
+
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history # share command history data
+setopt hist_ignore_all_dups # Remove all duplicates from history
+setopt hist_reduce_blanks
+
+
 
 # automatically remove duplicates from these arrays
 typeset -U path cdpath fpath manpath
