@@ -35,12 +35,12 @@ fi
 if [[ $platform == 'linux' ]]; then
   alias ls='ls --classify --color --human-readable --group-directories-first'
   alias connectionsperip='netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n'
+  alias cp='nocorrect cp --interactive --verbose --recursive --preserve=all'
+  alias free="free -t -m"
 elif [[ $platform == 'freebsd' ]]; then
   alias ls='ls -G'
   alias connectionsperip='netstat -na |awk '{print $5}' |cut -d "." -f1,2,3,4 |sort |uniq -c |sort -nr'
 fi
-alias connectionon80='netstat -an | grep 80 | wc -l'
-alias cp='nocorrect cp --interactive --verbose --recursive --preserve=all'
 alias mv='nocorrect mv --verbose --interactive'
 alias rm='nocorrect rm -Irv'
 alias sudo='nocorrect sudo'
@@ -55,7 +55,6 @@ alias rm='rm -v'
 alias mv='mv -v'
 alias k='killall'
 alias killall="killall --interactive --verbose"
-alias free="free -t -m"
 alias git="nocorrect git"
 alias scrot="scrot --border --count --quality 75 $HOME'/%d-%b-%y_%H-%M-%S_\$wx\$h.png' --exec 'du -h \$f'"
 alias aptitude="sudo aptitude"
@@ -71,4 +70,4 @@ alias zreload='source ~/.zshrc'
 alias -g G='| grep -e'
 alias -g L='| zless'
 
-alias upgrade='sudo pacman -Syu'
+alias tmux="tmux_run"

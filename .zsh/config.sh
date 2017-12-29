@@ -34,7 +34,7 @@ fi
 export HISTTIMEFORMAT="%t%d.%m.%y %H:%M:%S%t"
 export HISTIGNORE="&:ls:[bf]g:exit"
 
-export EDITOR="/usr/bin/nano"
+export EDITOR="/usr/bin/vim"
 export PAGER='less'
 export VISUAL='vim'
 
@@ -42,8 +42,8 @@ export VISUAL='vim'
 export LANG="en_US.UTF-8"
 export LC_PAPER="pl_PL.UTF-8"
 export LC_MEASUREMENT="pl_PL.UTF-8"
-export LC_TIME="pl_PL.UTF-8"
-export LC_ALL="pl_PL.UTF-8"
+export LC_TIME="pl_PL.UTF-8" 
+export LC_ALL="en_US.UTF-8"
 
 ########################################################################################
 ## Grep colors

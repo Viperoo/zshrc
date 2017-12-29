@@ -62,35 +62,6 @@ function zsh_stats() {
   fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n20
 }
 
-function paste() {
-  if [ -z $1 ]; then
-    1=text
-  fi
-
-  a=$(<&0)
-  if [ -z $2 ]; then
-    2=1
-  fi
-
-  curl -d lang=$1 -d private=$2 -d name=Viperoo -d text="$(echo $a)" http://p.szmijewski.pl/api/create
-}
-
-
-function paste() {
-  a=$(<&0)
-  a=$(echo $a | sed -e 's/&/%26/g')
-  if [ -z $2 ]; then
-    2=1
-  fi
-
-  if [ -z $1 ]; then
-    1=text
-  fi
-
-  curl -d lang=$1 -d private=$2 -d name=Viperoo --data-ascii text="$(echo $a)" "http://p.szmijewski.pl/api/create"
-}
-
-
 
 transfer() {
     # check arguments
@@ -191,4 +162,41 @@ log() {
       --bind "ctrl-m:execute:
                 echo '{}' | grep -o '[a-f0-9]\{7\}' | head -1 |
                 xargs -I % sh -c 'git show --color=always % | less -R'"
+}
+
+
+custom_exit() {
+    if [[ -z $TMUX ]]; then
+        builtin exit
+    else
+        real_tmux=$(whence -p tmux)
+        count=$($real_tmux list-windows &> /dev/null | wc -l)
+        if [ $count -gt 1 ]; then
+            builtin exit
+        else
+            $real_tmux detach
+        fi
+    fi
+}
+zle -N custom_exit
+
+tmux_run() {
+    me=$(whoami)
+    real_tmux=$(whence -p tmux)
+    args_num="$#"
+
+    if [ "$#" -gt 0 ]; then
+        TERM=screen-256color $real_tmux "$*"
+    else
+        if [[ ! -z $TMUX ]]; then
+            TERM=screen-256color $real_tmux
+        else
+            if $real_tmux has-session -t $me 2>/dev/null; then
+                TERM=screen-256color $real_tmux attach-session -t $me
+            else
+                TERM=screen-256color $real_tmux new -s $USER
+                TERM=screen-256color $real_tmux attach-session -t $me
+            fi
+        fi
+    fi
 }
